@@ -24,7 +24,7 @@ export default function AdminDashboard() {
   const [editForm, setEditForm] = useState({ name: "", midterm: 0, final: 0 });
   const [isSaving, setIsSaving] = useState(false);
 
-  const ADMIN_PASSCODE = process.env.ADMIN_PASSWORD;
+  const ADMIN_PASSCODE = process.env.NEXT_PUBLIC_ADMIN_PASSWORD!;
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

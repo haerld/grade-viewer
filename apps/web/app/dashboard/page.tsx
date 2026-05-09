@@ -24,8 +24,7 @@ export default function AdminDashboard() {
   const [editForm, setEditForm] = useState({ name: "", midterm: 0, final: 0 });
   const [isSaving, setIsSaving] = useState(false);
 
-  // In a real app, use Supabase Auth. For simple UI protection:
-  const ADMIN_PASSCODE = "admin123"; // Change this!
+  const ADMIN_PASSCODE = process.env.ADMIN_PASSWORD;
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

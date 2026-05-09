@@ -27,7 +27,22 @@ export default function UploadPage() {
     try {
       const data = await file.arrayBuffer();
       const workbook = XLSX.read(data);
-      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+
+      // 1. Get the first sheet name
+      const firstSheetName = workbook.SheetNames[0];
+      if (!firstSheetName) {
+        throw new Error("The uploaded Excel file has no sheets.");
+      }
+
+      // 2. Get the actual sheet object
+      const sheet = workbook.Sheets[firstSheetName];
+
+      // 3. Tell TypeScript to stop if the sheet object itself is missing
+      if (!sheet) {
+        throw new Error("Could not find the sheet data.");
+      }
+
+      // 4. Now TypeScript knows `sheet` is definitely a valid WorkSheet!
       const json: any[] = XLSX.utils.sheet_to_json(sheet);
 
       // 1. Filter out empty rows, gracefully handling the "ID " vs "ID" issue
